@@ -5,6 +5,7 @@
 <title>Lutf Restoran</title>
 
 <style>
+
 body{
   margin:0;
   font-family:Arial;
@@ -14,7 +15,7 @@ body{
   background-attachment:fixed;
 }
 
-/* qoraytirilgan fon */
+/* qora overlay */
 body::after{
   content:"";
   position:fixed;
@@ -28,7 +29,11 @@ section, h2, h3, p {
   color:white;
 }
 
-.nav, section, .cart{position:relative;z-index:2;}
+/* NAV va layout */
+.nav, section, .cart{
+  position:relative;
+  z-index:2;
+}
 
 .nav{
   display:flex;
@@ -49,7 +54,7 @@ section, h2, h3, p {
 section{display:none;padding:20px;}
 .active{display:block}
 
-/* HOME FAQT QORA */
+/* HOME text qora */
 #home h1, #home h3, #home p{
   color:black;
 }
@@ -77,6 +82,13 @@ section{display:none;padding:20px;}
   color:black;
 }
 
+/* 🔥 ENG MUHIM TUZATISH */
+.card h4,
+.card p{
+  color:black;   /* narxlar endi ko‘rinadi */
+}
+
+/* image */
 .card img{
   width:100%;
   height:120px;
@@ -126,14 +138,6 @@ input, textarea{
   margin-top:8px;
 }
 
-/* PAY ALERT */
-.pay{
-  background:#fff3cd;
-  padding:8px;
-  border-radius:8px;
-  font-size:13px;
-  margin-bottom:10px;
-}
 </style>
 </head>
 
@@ -165,7 +169,7 @@ input, textarea{
 
 <!-- FIKR -->
 <section id="reviews">
-<h2>Fikr</h2>
+<h2>Fikr yozing</h2>
 <input id="name" placeholder="Ism">
 <textarea id="text" placeholder="Fikr"></textarea>
 <button onclick="addReview()">Yuborish</button>
@@ -174,7 +178,7 @@ input, textarea{
 
 <!-- BOOKING -->
 <section id="booking">
-<h2>Joy band</h2>
+<h2>Joy band qilish</h2>
 <input id="bname" placeholder="Ism">
 <input id="bphone" placeholder="Telefon">
 <input id="bpeople" placeholder="Kishi soni">
@@ -192,7 +196,7 @@ input, textarea{
 <h3>🚀 Biz sayt yaratib beramiz</h3>
 <p>Aloqaga chiqing</p>
 
-<p>💳 OLDINDAN TO‘LOV MAJBURIY: 4073420043009707</p>
+<p>💳 OLDINDAN TO‘LOV: 4073420043009707</p>
 
 <iframe width="100%" height="250"
 src="https://maps.google.com/maps?q=Tashkent&output=embed"></iframe>
@@ -206,23 +210,14 @@ src="https://maps.google.com/maps?q=Tashkent&output=embed"></iframe>
 <!-- MODAL -->
 <div class="modal" id="modal">
 <div class="box">
-
 <h3>Savat</h3>
-
 <div id="cartList"></div>
 
-<div class="pay">
-⚠ Buyurtma qilishdan oldin karta orqali to‘lov majburiy:
-<br><b>4073420043009707</b>
-</div>
-
-<input id="payCard" placeholder="To‘lov qilgan karta raqami">
 <input id="address" placeholder="Manzil">
 <input id="phone" placeholder="Telefon">
 
-<button onclick="order()">BUYURTMA BERISH</button>
+<button onclick="order()">Buyurtma berish</button>
 <button onclick="closeCart()">Yopish</button>
-
 </div>
 </div>
 
@@ -230,7 +225,7 @@ src="https://maps.google.com/maps?q=Tashkent&output=embed"></iframe>
 
 const foods=[
 {name:"Osh",price:45000,img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84"},
-{name:"Burger",price:40000,img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086"},
+{name:"Manti",price:40000,img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086"},
 {name:"Shashlik",price:35000,img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"},
 {name:"Kabob",price:60000,img:"https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba"},
 {name:"Somsa",price:12000,img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
@@ -279,17 +274,11 @@ document.getElementById("modal").style.display="none";
 }
 
 function order(){
-let card=document.getElementById("payCard").value;
 let a=document.getElementById("address").value;
 let p=document.getElementById("phone").value;
 
-if(card===""){
-alert("OLDINDAN TO‘LOV QILING!");
-return;
-}
-
 if(!a || !p){
-alert("To‘liq to‘ldiring!");
+alert("To‘ldiring!");
 return;
 }
 
