@@ -5,53 +5,37 @@
 <title>Lutf Restoran</title>
 
 <style>
-
-/* ===== ORQA FON ===== */
 body{
   margin:0;
   font-family:Arial;
-  background-image:url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0");
+  background:url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0");
   background-size:cover;
   background-position:center;
   background-attachment:fixed;
 }
 
-/* rangli overlay */
+/* qoraytirilgan fon */
 body::after{
   content:"";
   position:fixed;
   inset:0;
-  background:linear-gradient(
-    120deg,
-    rgba(255,0,0,0.12),
-    rgba(255,255,255,0.25),
-    rgba(255,192,203,0.15),
-    rgba(255,215,0,0.10)
-  );
+  background:rgba(0,0,0,0.5);
   z-index:0;
 }
 
-/* qoramtir */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.25);
-  z-index:0;
+/* umumiy text */
+section, h2, h3, p {
+  color:white;
 }
 
-.nav, section, .cart{
-  position:relative;
-  z-index:2;
-}
+.nav, section, .cart{position:relative;z-index:2;}
 
-/* ===== NAV ===== */
 .nav{
   display:flex;
   justify-content:center;
   gap:15px;
-  padding:12px;
   background:white;
+  padding:12px;
   position:sticky;
   top:0;
 }
@@ -62,44 +46,23 @@ body::before{
   color:#d60000;
 }
 
-/* ===== SECTIONS ===== */
-section{
-  display:none;
-  padding:20px;
-}
+section{display:none;padding:20px;}
 .active{display:block}
 
-/* ===== HERO ===== */
+/* HOME FAQT QORA */
+#home h1, #home h3, #home p{
+  color:black;
+}
+
+/* HERO */
 .hero{
-  text-align:center;
-  background:linear-gradient(135deg,#fff,#ffe6f0,#fff7cc);
-  padding:30px;
-  margin:20px;
-  border-radius:20px;
-}
-
-.hero img{
-  width:300px;
+  background:white;
+  padding:25px;
   border-radius:15px;
+  text-align:center;
 }
 
-/* ===== KATALOG ===== */
-.tabs{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
-}
-
-.tabs button{
-  padding:8px 12px;
-  border:none;
-  background:#ffcc00;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* ===== MENU ===== */
+/* MENU */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -111,6 +74,7 @@ section{
   padding:10px;
   border-radius:12px;
   text-align:center;
+  color:black;
 }
 
 .card img{
@@ -120,12 +84,12 @@ section{
   border-radius:10px;
 }
 
-/* ===== SAVAT ===== */
+/* CART */
 .cart{
   position:fixed;
   bottom:20px;
   right:20px;
-  background:#d60000;
+  background:red;
   color:white;
   width:60px;
   height:60px;
@@ -137,12 +101,12 @@ section{
   z-index:999;
 }
 
-/* ===== MODAL ===== */
+/* MODAL */
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.7);
   justify-content:center;
   align-items:center;
   z-index:9999;
@@ -152,31 +116,24 @@ section{
   background:white;
   padding:15px;
   border-radius:12px;
-  width:300px;
+  width:320px;
+  color:black;
 }
 
-input,textarea{
+input, textarea{
   width:100%;
   padding:8px;
   margin-top:8px;
 }
 
-/* ===== MANZIL (WHITE FIX) ===== */
-#location{
-  color:white;
-  text-align:center;
+/* PAY ALERT */
+.pay{
+  background:#fff3cd;
+  padding:8px;
+  border-radius:8px;
+  font-size:13px;
+  margin-bottom:10px;
 }
-
-#location h2{
-  color:#ffcc00;
-}
-
-#location p{
-  font-size:18px;
-  font-weight:bold;
-  text-shadow:0 2px 5px rgba(0,0,0,0.6);
-}
-
 </style>
 </head>
 
@@ -184,67 +141,58 @@ input,textarea{
 
 <!-- NAV -->
 <div class="nav">
-  <a onclick="show('home')">HOME</a>
-  <a onclick="show('menu')">MENU</a>
-  <a onclick="show('reviews')">FIKR</a>
-  <a onclick="show('booking')">JOY BAND QILISH</a>
-  <a onclick="show('location')">MANZIL</a>
+<a onclick="show('home')">HOME</a>
+<a onclick="show('menu')">MENU</a>
+<a onclick="show('reviews')">FIKR</a>
+<a onclick="show('booking')">JOY BAND</a>
+<a onclick="show('location')">MANZIL</a>
 </div>
 
 <!-- HOME -->
 <section id="home" class="active">
-  <div class="hero">
-    <h1>LUTF RESTORAN</h1>
-    <h3>Milliy taomlar</h3>
-    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d">
-  </div>
+<div class="hero">
+<h1>LUTF RESTORAN</h1>
+<h3>Assalomu alaykum Lutf restoraniga marhamat</h3>
+<p>Milliy taomlar</p>
+</div>
 </section>
 
 <!-- MENU -->
 <section id="menu">
-<h2 style="text-align:center">🍽 KATALOG</h2>
-
-<div class="tabs">
-<button onclick="filter('all')">Hammasi</button>
-<button onclick="filter('salat')">Salat</button>
-<button onclick="filter('soup')">Sho'rva</button>
-<button onclick="filter('main')">Asosiy</button>
-<button onclick="filter('drink')">Ichimlik</button>
-</div>
-
+<h2>🍽 MENU</h2>
 <div class="grid" id="menuList"></div>
 </section>
 
 <!-- FIKR -->
 <section id="reviews">
-<h2>Fikr yozing 💬</h2>
+<h2>Fikr</h2>
 <input id="name" placeholder="Ism">
 <textarea id="text" placeholder="Fikr"></textarea>
 <button onclick="addReview()">Yuborish</button>
 <div id="reviewList"></div>
 </section>
 
-<!-- JOY BAND QILISH -->
+<!-- BOOKING -->
 <section id="booking">
-<h2>Band qilish</h2>
-
+<h2>Joy band</h2>
 <input id="bname" placeholder="Ism">
 <input id="bphone" placeholder="Telefon">
-<input id="bpeople" placeholder="Necha kishi">
-<input id="baddress" placeholder="Manzil (majburiy)">
+<input id="bpeople" placeholder="Kishi soni">
+<input id="baddress" placeholder="Manzil">
 <button onclick="book()">Yuborish</button>
-
 </section>
 
-<!-- MANZIL -->
+<!-- LOCATION -->
 <section id="location">
 <h2>📍 MANZIL</h2>
 
-<p>Shota Rustaveli 105, Toshkent</p>
-    <h2>🚀 Xizmatimiz</h2>
-  <p>Biz restoranlar va bizneslar uchun zamonaviy, tezkor va chiroyli saytlar yaratamiz aloqaga chiqing.</p>
-</div>
-<p>+99894431127</p>
+<p>Toshkent, Shota Rustaveli 105</p>
+<p>📞 +99894431127</p>
+
+<h3>🚀 Biz sayt yaratib beramiz</h3>
+<p>Aloqaga chiqing</p>
+
+<p>💳 OLDINDAN TO‘LOV MAJBURIY: 4073420043009707</p>
 
 <iframe width="100%" height="250"
 src="https://maps.google.com/maps?q=Tashkent&output=embed"></iframe>
@@ -258,32 +206,46 @@ src="https://maps.google.com/maps?q=Tashkent&output=embed"></iframe>
 <!-- MODAL -->
 <div class="modal" id="modal">
 <div class="box">
+
 <h3>Savat</h3>
+
 <div id="cartList"></div>
 
-<input id="address" placeholder="Manzil (majburiy)">
-<input id="phone" placeholder="Telefon (majburiy)">
+<div class="pay">
+⚠ Buyurtma qilishdan oldin karta orqali to‘lov majburiy:
+<br><b>4073420043009707</b>
+</div>
 
-<button onclick="order()">Buyurtma berish</button>
+<input id="payCard" placeholder="To‘lov qilgan karta raqami">
+<input id="address" placeholder="Manzil">
+<input id="phone" placeholder="Telefon">
+
+<button onclick="order()">BUYURTMA BERISH</button>
 <button onclick="closeCart()">Yopish</button>
+
 </div>
 </div>
 
 <script>
 
-let cart=[];
-
 const foods=[
-{name:"Achichuk",cat:"salat",price:15000,img:"https://images.unsplash.com/photo-1604908177522-040b7b4b8b2a"},
-{name:"Sho'rva",cat:"soup",price:35000,img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84"},
-{name:"Osh",cat:"main",price:45000,img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84"},
-{name:"Manti",cat:"main",price:40000,img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086"},
-{name:"Choy",cat:"drink",price:5000,img:"https://images.unsplash.com/photo-1511920170033-f8396924c348"}
+{name:"Osh",price:45000,img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84"},
+{name:"Burger",price:40000,img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086"},
+{name:"Shashlik",price:35000,img:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1"},
+{name:"Kabob",price:60000,img:"https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba"},
+{name:"Somsa",price:12000,img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"},
+{name:"Choy",price:5000,img:"https://images.unsplash.com/photo-1511920170033-f8396924c348"},
+{name:"Kofe",price:12000,img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93"},
+{name:"Cola",price:10000,img:"https://images.unsplash.com/photo-1622483767028-3f66f32aef97"},
+{name:"Non",price:3000,img:"https://images.unsplash.com/photo-1608198093002-ad4e005484ec"},
+{name:"Desert",price:20000,img:"https://images.unsplash.com/photo-1551024601-bec78aea704b"}
 ];
 
-function render(list){
+let cart=[];
+
+function render(){
 let html="";
-list.forEach(f=>{
+foods.forEach(f=>{
 html+=`
 <div class="card">
 <img src="${f.img}">
@@ -294,12 +256,7 @@ html+=`
 });
 document.getElementById("menuList").innerHTML=html;
 }
-render(foods);
-
-function filter(c){
-if(c==="all") render(foods);
-else render(foods.filter(f=>f.cat===c));
-}
+render();
 
 function add(n,p){
 cart.push({n,p});
@@ -322,11 +279,17 @@ document.getElementById("modal").style.display="none";
 }
 
 function order(){
+let card=document.getElementById("payCard").value;
 let a=document.getElementById("address").value;
 let p=document.getElementById("phone").value;
 
-if(a=="" || p==""){
-alert("Manzil va telefon majburiy!");
+if(card===""){
+alert("OLDINDAN TO‘LOV QILING!");
+return;
+}
+
+if(!a || !p){
+alert("To‘liq to‘ldiring!");
 return;
 }
 
@@ -336,18 +299,19 @@ document.getElementById("count").innerText=0;
 closeCart();
 }
 
-function book(){
-let a=document.getElementById("baddress").value;
-if(a==""){
-alert("Manzil majburiy!");
-return;
-}
-alert("Band qilindi!");
-}
-
 function show(id){
 document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
+}
+
+function addReview(){
+let n=document.getElementById("name").value;
+let t=document.getElementById("text").value;
+document.getElementById("reviewList").innerHTML+=`<p><b>${n}</b>: ${t}</p>`;
+}
+
+function book(){
+alert("Band qilindi!");
 }
 
 </script>
