@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<title>Lutf Restoran</title>
+
+<style>
+
+/* ===== ORQA FON ===== */
+body{
+  margin:0;
+  font-family:Arial;
+  background-image:url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
+
+/* rangli overlay */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    rgba(255,0,0,0.12),
+    rgba(255,255,255,0.25),
+    rgba(255,192,203,0.15),
+    rgba(255,215,0,0.10)
+  );
+  z-index:0;
+}
+
+/* qoramtir */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.25);
+  z-index:0;
+}
+
+.nav, section, .cart{
+  position:relative;
+  z-index:2;
+}
+
+/* ===== NAV ===== */
+.nav{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  padding:12px;
+  background:white;
+  position:sticky;
+  top:0;
+}
+
+.nav a{
+  cursor:pointer;
+  font-weight:bold;
+  color:#d60000;
+}
+
+/* ===== SECTIONS ===== */
+section{
+  display:none;
+  padding:20px;
+}
+.active{display:block}
+
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+  background:linear-gradient(135deg,#fff,#ffe6f0,#fff7cc);
+  padding:30px;
+  margin:20px;
+  border-radius:20px;
+}
+
+.hero img{
+  width:300px;
+  border-radius:15px;
+}
+
+/* ===== KATALOG ===== */
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.tabs button{
+  padding:8px 12px;
+  border:none;
+  background:#ffcc00;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* ===== MENU ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.card{
+  background:white;
+  padding:10px;
+  border-radius:12px;
+  text-align:center;
+}
+
+.card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* ===== SAVAT ===== */
+.cart{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#d60000;
+  color:white;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  z-index:999;
+}
+
+/* ===== MODAL ===== */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.box{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  width:300px;
+}
+
+input,textarea{
+  width:100%;
+  padding:8px;
+  margin-top:8px;
+}
+
+/* ===== MANZIL (WHITE FIX) ===== */
+#location{
+  color:white;
+  text-align:center;
+}
+
+#location h2{
+  color:#ffcc00;
+}
+
+#location p{
+  font-size:18px;
+  font-weight:bold;
+  text-shadow:0 2px 5px rgba(0,0,0,0.6);
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <a onclick="show('home')">HOME</a>
+  <a onclick="show('menu')">MENU</a>
+  <a onclick="show('reviews')">FIKR</a>
+  <a onclick="show('booking')">JOY BAND QILISH</a>
+  <a onclick="show('location')">MANZIL</a>
+</div>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <h1>LUTF RESTORAN</h1>
+    <h3>Milliy taomlar</h3>
+    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d">
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+<h2 style="text-align:center">🍽 KATALOG</h2>
+
+<div class="tabs">
+<button onclick="filter('all')">Hammasi</button>
+<button onclick="filter('salat')">Salat</button>
+<button onclick="filter('soup')">Sho'rva</button>
+<button onclick="filter('main')">Asosiy</button>
+<button onclick="filter('drink')">Ichimlik</button>
+</div>
+
+<div class="grid" id="menuList"></div>
+</section>
+
+<!-- FIKR -->
+<section id="reviews">
+<h2>Fikr yozing 💬</h2>
+<input id="name" placeholder="Ism">
+<textarea id="text" placeholder="Fikr"></textarea>
+<button onclick="addReview()">Yuborish</button>
+<div id="reviewList"></div>
+</section>
+
+<!-- JOY BAND QILISH -->
+<section id="booking">
+<h2>Band qilish</h2>
+
+<input id="bname" placeholder="Ism">
+<input id="bphone" placeholder="Telefon">
+<input id="bpeople" placeholder="Necha kishi">
+<input id="baddress" placeholder="Manzil (majburiy)">
+<button onclick="book()">Yuborish</button>
+
+</section>
+
+<!-- MANZIL -->
+<section id="location">
+<h2>📍 MANZIL</h2>
+
+<p>Shota Rustaveli 105, Toshkent</p>
+<p>+998997421127</p>
+
+<iframe width="100%" height="250"
+src="https://maps.google.com/maps?q=Tashkent&output=embed"></iframe>
+</section>
+
+<!-- CART -->
+<div class="cart" onclick="openCart()">
+🛒 <span id="count">0</span>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="box">
+<h3>Savat</h3>
+<div id="cartList"></div>
+
+<input id="address" placeholder="Manzil (majburiy)">
+<input id="phone" placeholder="Telefon (majburiy)">
+
+<button onclick="order()">Buyurtma berish</button>
+<button onclick="closeCart()">Yopish</button>
+</div>
+</div>
+
+<script>
+
+let cart=[];
+
+const foods=[
+{name:"Achichuk",cat:"salat",price:15000,img:"https://images.unsplash.com/photo-1604908177522-040b7b4b8b2a"},
+{name:"Sho'rva",cat:"soup",price:35000,img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84"},
+{name:"Osh",cat:"main",price:45000,img:"https://images.unsplash.com/photo-1606491956689-2ea866880c84"},
+{name:"Manti",cat:"main",price:40000,img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086"},
+{name:"Choy",cat:"drink",price:5000,img:"https://images.unsplash.com/photo-1511920170033-f8396924c348"}
+];
+
+function render(list){
+let html="";
+list.forEach(f=>{
+html+=`
+<div class="card">
+<img src="${f.img}">
+<h4>${f.name}</h4>
+<p>${f.price} so'm</p>
+<button onclick="add('${f.name}',${f.price})">Savatga</button>
+</div>`;
+});
+document.getElementById("menuList").innerHTML=html;
+}
+render(foods);
+
+function filter(c){
+if(c==="all") render(foods);
+else render(foods.filter(f=>f.cat===c));
+}
+
+function add(n,p){
+cart.push({n,p});
+document.getElementById("count").innerText=cart.length;
+}
+
+function openCart(){
+let html="",sum=0;
+cart.forEach(i=>{
+html+=i.n+" - "+i.p+"<br>";
+sum+=i.p;
+});
+html+="<hr><b>Jami: "+sum+"</b>";
+document.getElementById("cartList").innerHTML=html;
+document.getElementById("modal").style.display="flex";
+}
+
+function closeCart(){
+document.getElementById("modal").style.display="none";
+}
+
+function order(){
+let a=document.getElementById("address").value;
+let p=document.getElementById("phone").value;
+
+if(a=="" || p==""){
+alert("Manzil va telefon majburiy!");
+return;
+}
+
+alert("Buyurtma qabul qilindi!");
+cart=[];
+document.getElementById("count").innerText=0;
+closeCart();
+}
+
+function book(){
+let a=document.getElementById("baddress").value;
+if(a==""){
+alert("Manzil majburiy!");
+return;
+}
+alert("Band qilindi!");
+}
+
+function show(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
